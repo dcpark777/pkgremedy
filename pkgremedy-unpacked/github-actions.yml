@@ -1,0 +1,13 @@
+# Vulnerability gate. Assumes pkgremedy is vendored at tools/pkgremedy/ and the
+# runner has Docker. Set repo/org variable SPARK_BASE_IMAGE to your base.
+name: dependency-vulns
+on: [pull_request]
+jobs:
+  pkgremedy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vulnerability gate (fail on fixable)
+        env:
+          BASE: ${{ vars.SPARK_BASE_IMAGE }}
+        run: ./tools/pkgremedy/pkgremedy-run.sh --base "$BASE" -- scan --fail-on fixable

@@ -1,0 +1,7 @@
+// Add this stage to your pipeline. SPARK_BASE_IMAGE comes from your env/credentials.
+stage('Dependency vuln gate') {
+  steps {
+    sh './tools/pkgremedy/pkgremedy-run.sh --base $SPARK_BASE_IMAGE -- scan --fail-on fixable'
+    // or, via Make:  sh 'make -C tools/pkgremedy scan BASE=$SPARK_BASE_IMAGE'
+  }
+}

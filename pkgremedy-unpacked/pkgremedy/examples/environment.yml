@@ -1,0 +1,11 @@
+name: fraud-app
+channels:
+  - conda-forge          # replace/add your internal mirror as the first entry
+dependencies:
+  - python=3.11
+  - pyspark=3.5
+  - pandas
+  - pip
+  - pip:
+      - snowflake-connector-python
+      - some-internal-lib
